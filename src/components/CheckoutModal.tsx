@@ -819,66 +819,68 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </button>
             </div>
 
-            {/* Realistic Phone STK Push Prompt Dialog */}
-            <div className="bg-[#061309] rounded-2xl border border-emerald-600/50 p-4 space-y-4 shadow-inner">
-              <div className="flex items-center justify-between text-xs text-emerald-300">
-                <span className="flex items-center gap-1.5 font-mono">
-                  <Smartphone className="w-4 h-4 text-emerald-400 animate-bounce" />
-                  <span>Prompt sent to mobile handset:</span>
-                </span>
-                <span className="font-mono font-bold text-white bg-emerald-950 px-2.5 py-1 rounded-lg border border-emerald-700">
-                  {mpesaPhone || phone}
-                </span>
-              </div>
-
-              {/* Exact Safaricom SIM Toolkit Mobile Prompt Notice */}
-              <div className="bg-gradient-to-b from-[#183F25] to-[#122E1B] p-4 rounded-xl border border-emerald-400/60 shadow-md space-y-3 text-center">
-                <div className="flex items-center justify-center gap-1.5 text-[10px] font-mono text-emerald-300 font-bold uppercase tracking-wider">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                  <span>Awaiting Action on Your Handset</span>
-                </div>
-
-                <div className="p-3 bg-black/40 rounded-xl border border-emerald-500/40 text-left space-y-1.5">
-                  <span className="text-[10px] uppercase font-mono tracking-wider text-emerald-400 block font-bold">
-                    Handset Screen Prompt:
+            {/* Show handset instructions only after the API confirms the STK request. */}
+            {stkStatus !== 'failed' && (
+              <div className="bg-[#061309] rounded-2xl border border-emerald-600/50 p-4 space-y-4 shadow-inner">
+                <div className="flex items-center justify-between text-xs text-emerald-300">
+                  <span className="flex items-center gap-1.5 font-mono">
+                    <Smartphone className="w-4 h-4 text-emerald-400 animate-bounce" />
+                    <span>Prompt sent to mobile handset:</span>
                   </span>
-                  <p className="text-xs sm:text-[13px] font-semibold text-white leading-relaxed font-sans">
-                    Do you want to pay <strong className="text-amber-300 font-mono">KSh {totalInKES.toLocaleString()}</strong> to <strong className="text-emerald-200">clinton (1242385)</strong> Account <strong className="text-emerald-200">DF-HARVEST</strong>?
-                  </p>
-                </div>
-
-                <div className="pt-1 flex items-center justify-center gap-2 text-xs text-emerald-200">
-                  <Lock className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="font-medium text-left">
-                    Enter your <strong>4-digit M-Pesa PIN</strong> on your mobile phone screen to authorize.
-                  </span>
-                </div>
-              </div>
-
-              {/* Live Status indicator */}
-              <div className="flex items-center justify-between text-xs pt-1 px-1">
-                <div className="flex items-center gap-2">
-                  {stkStatus === 'waiting' ? (
-                    <Loader2 className="w-4 h-4 text-emerald-400 animate-spin" />
-                  ) : stkStatus === 'success' ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  ) : (
-                    <AlertCircle className="w-4 h-4 text-amber-400" />
-                  )}
-                  <span className="text-[11px] text-emerald-200">
-                    {stkStatus === 'waiting'
-                      ? 'Waiting for M-Pesa network confirmation...'
-                      : stkStatus === 'success'
-                      ? 'Payment authorized successfully!'
-                      : 'Connecting to Safaricom Daraja...'}
+                  <span className="font-mono font-bold text-white bg-emerald-950 px-2.5 py-1 rounded-lg border border-emerald-700">
+                    {mpesaPhone || phone}
                   </span>
                 </div>
 
-                <span className="font-mono text-xs font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded border border-emerald-800">
-                  {countdown}s
-                </span>
+                {/* Exact Safaricom SIM Toolkit Mobile Prompt Notice */}
+                <div className="bg-gradient-to-b from-[#183F25] to-[#122E1B] p-4 rounded-xl border border-emerald-400/60 shadow-md space-y-3 text-center">
+                  <div className="flex items-center justify-center gap-1.5 text-[10px] font-mono text-emerald-300 font-bold uppercase tracking-wider">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                    <span>Awaiting Action on Your Handset</span>
+                  </div>
+
+                  <div className="p-3 bg-black/40 rounded-xl border border-emerald-500/40 text-left space-y-1.5">
+                    <span className="text-[10px] uppercase font-mono tracking-wider text-emerald-400 block font-bold">
+                      Handset Screen Prompt:
+                    </span>
+                    <p className="text-xs sm:text-[13px] font-semibold text-white leading-relaxed font-sans">
+                      Do you want to pay <strong className="text-amber-300 font-mono">KSh {totalInKES.toLocaleString()}</strong> to <strong className="text-emerald-200">clinton (1242385)</strong> Account <strong className="text-emerald-200">DF-HARVEST</strong>?
+                    </p>
+                  </div>
+
+                  <div className="pt-1 flex items-center justify-center gap-2 text-xs text-emerald-200">
+                    <Lock className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span className="font-medium text-left">
+                      Enter your <strong>4-digit M-Pesa PIN</strong> on your mobile phone screen to authorize.
+                    </span>
+                  </div>
+                </div>
+
+                {/* Live Status indicator */}
+                <div className="flex items-center justify-between text-xs pt-1 px-1">
+                  <div className="flex items-center gap-2">
+                    {stkStatus === 'waiting' ? (
+                      <Loader2 className="w-4 h-4 text-emerald-400 animate-spin" />
+                    ) : stkStatus === 'success' ? (
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 text-amber-400" />
+                    )}
+                    <span className="text-[11px] text-emerald-200">
+                      {stkStatus === 'waiting'
+                        ? 'Waiting for M-Pesa network confirmation...'
+                        : stkStatus === 'success'
+                        ? 'Payment authorized successfully!'
+                        : 'Connecting to Safaricom Daraja...'}
+                    </span>
+                  </div>
+
+                  <span className="font-mono text-xs font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded border border-emerald-800">
+                    {countdown}s
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Error message if failed */}
             {stkError && (
