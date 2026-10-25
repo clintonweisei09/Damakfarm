@@ -7,6 +7,41 @@ import {
 import { CartItem, OrderConfirmation } from '../types/farm';
 import { useCurrency } from '../context/CurrencyContext';
 
+interface StkPushResponse {
+  success: boolean;
+  checkoutRequestId: string;
+  promptText?: string;
+  customerMessage?: string;
+  error?: string;
+}
+
+interface TransactionResponse {
+  success: boolean;
+  transaction?: {
+    status: string;
+    resultDesc?: string;
+    receiptNumber?: string;
+    accountRef?: string;
+    phone?: string;
+  };
+  error?: string;
+}
+
+const PAYMENT_API_UNAVAILABLE =
+  'M-Pesa checkout is unavailable on this GitHub Pages site because it only hosts static files, not the Node.js payment API. Deploy the payment server to enable STK Push, or choose Pay at Farm Gate.';
+
+async function readApiJson<T>(response: Response): Promise<T> {
+  if (!response.headers.get('content-type')?.includes('application/json')) {
+    throw new Error(PAYMENT_API_UNAVAILABLE);
+  }
+
+  try {
+    return await response.json() as T;
+  } catch {
+    throw new Error('The payment service returned an invalid response. Please try again or choose Pay at Farm Gate.');
+  }
+}
+
 interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -100,7 +135,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         }),
       });
 
-      const data = await response.json();
+      const data = await readApiJson<StkPushResponse>(response);
 
       if (!response.ok || !data.success) {
         throw new Error(data.error || 'Failed to dispatch M-Pesa STK Push prompt');
@@ -131,7 +166,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       const pollQuery = async () => {
         try {
           const queryRes = await fetch(`/api/mpesa/query/${data.checkoutRequestId}`);
-          const queryData = await queryRes.json();
+          const queryData = await readApiJson<TransactionResponse>(queryRes);
 
           if (queryData.success && queryData.transaction) {
             if (queryData.transaction.status === 'COMPLETED') {
@@ -145,8 +180,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               setStkError(queryData.transaction.resultDesc || 'M-Pesa transaction was cancelled or failed.');
             }
           }
-        } catch (e) {
-          // Ignore transient network errors
+        } catch (error) {
+          if (error instanceof Error && error.message === PAYMENT_API_UNAVAILABLE) {
+            clearInterval(pollingTimerRef.current);
+            clearInterval(countdownInterval);
+            setStkStatus('failed');
+            setStkError(error.message);
+          }
         }
       };
 
@@ -156,9 +196,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         pollingTimerRef.current = setInterval(pollQuery, 3500);
       }, 4000);
 
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStkStatus('failed');
-      setStkError(err.message || 'Could not reach M-Pesa gateway. Please check phone number and retry.');
+      setStkError(err instanceof Error ? err.message : 'Could not reach M-Pesa gateway. Please check phone number and retry.');
     }
   };
 
@@ -203,7 +243,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   // Allow sandbox simulated confirmation for instant verification
   const handleSimulatePinAuthorize = async () => {
     if (!checkoutRequestId) {
-      finalizeMpesaOrder('DF-HARVEST', mpesaPhone || phone);
+      setStkStatus('failed');
+      setStkError('No active M-Pesa transaction is available to authorize.');
       return;
     }
     try {
@@ -212,18 +253,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ checkoutRequestId, approved: true }),
       });
-      const data = await res.json();
-      if (data.success) {
-        finalizeMpesaOrder(
-          data.transaction.accountRef || 'DF-HARVEST',
-          data.transaction.phone,
-          data.transaction.receiptNumber
-        );
-      } else {
-        finalizeMpesaOrder('DF-HARVEST', mpesaPhone || phone);
+      const data = await readApiJson<TransactionResponse>(res);
+      if (!res.ok || !data.success || !data.transaction) {
+        throw new Error(data.error || 'The payment service could not authorize this transaction.');
       }
-    } catch (e) {
-      finalizeMpesaOrder('DF-HARVEST', mpesaPhone || phone);
+      finalizeMpesaOrder(
+        data.transaction.accountRef || 'DF-HARVEST',
+        data.transaction.phone || mpesaPhone || phone,
+        data.transaction.receiptNumber
+      );
+    } catch (error) {
+      setStkStatus('failed');
+      setStkError(error instanceof Error ? error.message : 'The payment service could not authorize this transaction.');
     }
   };
 
@@ -876,13 +917,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
 
               <div className="text-center pt-1">
-                <button
-                  type="button"
-                  onClick={handleSimulatePinAuthorize}
-                  className="text-[10px] text-emerald-500/40 hover:text-emerald-400/80 transition-colors cursor-pointer underline"
-                >
-                  (Demo/Preview only: Instant Authorize)
-                </button>
+                {import.meta.env.DEV && (
+                  <button
+                    type="button"
+                    onClick={handleSimulatePinAuthorize}
+                    className="text-[10px] text-emerald-500/40 hover:text-emerald-400/80 transition-colors cursor-pointer underline"
+                  >
+                    (Demo/Preview only: Instant Authorize)
+                  </button>
+                )}
               </div>
             </div>
           </div>
