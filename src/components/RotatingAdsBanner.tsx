@@ -113,7 +113,7 @@ export const RotatingAdsBanner: React.FC = () => {
       >
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-10">
           {/* Ad Content */}
-          <div className="flex items-start gap-3 flex-1 min-w-0">
+          <div className="flex items-start gap-3 w-full min-w-0 md:flex-1">
             <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center shrink-0 border border-white/20">
               <Megaphone className="w-5 h-5 text-white animate-pulse" />
             </div>
@@ -131,7 +131,7 @@ export const RotatingAdsBanner: React.FC = () => {
                 </span>
               </div>
 
-              <h4 className="font-serif text-base sm:text-lg font-bold text-white leading-snug truncate">
+              <h4 className="font-serif text-base sm:text-lg font-bold text-white leading-snug line-clamp-2">
                 {currentAd.headline}
               </h4>
               <p className="text-xs text-white/85 line-clamp-1 mt-0.5">
@@ -141,7 +141,7 @@ export const RotatingAdsBanner: React.FC = () => {
           </div>
 
           {/* Action & Controls */}
-          <div className="flex items-center gap-3 shrink-0 self-end md:self-center">
+          <div className="flex items-center justify-between gap-2 w-full md:w-auto md:shrink-0 self-end md:self-center">
             {/* CTA button with background */}
             <button
               onClick={() => setActivePromoModal(currentAd)}

@@ -79,14 +79,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Main Navbar Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-6 lg:gap-8 h-20">
+        <div className="flex items-center justify-between gap-2 sm:gap-6 lg:gap-8 h-16 sm:h-20">
           {/* Zone 1: Brand Wordmark with Authentic Agricultural Style */}
           <button
             onClick={() => handleNavClick('hero')}
-            className="flex items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded-lg group cursor-pointer shrink-0"
+            className="flex items-center gap-2 sm:gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 rounded-lg group cursor-pointer shrink-0"
           >
             {/* Handcrafted Agriculture Emblem */}
-            <div className="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-[#164E2D] via-[#1E6B3C] to-[#2D6A4F] text-[#FAF8F5] flex items-center justify-center shrink-0 shadow-md ring-2 ring-emerald-300 group-hover:scale-105 transition-transform duration-200">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#164E2D] via-[#1E6B3C] to-[#2D6A4F] text-[#FAF8F5] flex items-center justify-center shrink-0 shadow-md ring-2 ring-emerald-300 group-hover:scale-105 transition-transform duration-200">
               <Sprout className="w-6 h-6 text-emerald-200 drop-shadow-xs" />
               <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-[#164E2D] flex items-center justify-center">
                 <Sun className="w-2.5 h-2.5 text-amber-950" />
@@ -95,10 +95,10 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Typography in Heritage Agrarian Style */}
             <div className="flex flex-col">
-              <span className="font-serif text-2xl sm:text-[1.75rem] font-black tracking-tight text-[#0F381E] whitespace-nowrap shrink-0 group-hover:text-emerald-800 transition-colors drop-shadow-2xs">
+              <span className="font-serif text-xl sm:text-[1.75rem] font-black tracking-tight text-[#0F381E] whitespace-nowrap shrink-0 group-hover:text-emerald-800 transition-colors drop-shadow-2xs">
                 Damak Farm
               </span>
-              <div className="flex items-center gap-1.5 -mt-0.5">
+              <div className="hidden sm:flex items-center gap-1.5 -mt-0.5">
                 <span className="text-[10px] tracking-[0.16em] uppercase font-extrabold text-emerald-800">
                   From Damak Farm
                 </span>
@@ -150,11 +150,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Zone 3: Actions (Background color added to Visit Farm button) */}
-          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-3 shrink-0">
             {/* Visit Farm Button with distinctive background color! */}
             <button
               onClick={onOpenFarmGate}
-              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-amber-950 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 border border-amber-300 rounded-xl shadow-sm hover:shadow-md active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-amber-950 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 border border-amber-300 rounded-xl shadow-sm hover:shadow-md active:scale-95 transition-all cursor-pointer whitespace-nowrap"
             >
               <Calendar className="w-3.5 h-3.5 text-amber-950" />
               <span>Visit Farm</span>
@@ -164,10 +164,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenCart}
               aria-label={`View harvest bag with ${totalItemCount} items`}
-              className="flex items-center gap-2 px-3.5 sm:px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-[#164E2D] to-[#1E6B3C] rounded-xl hover:from-[#113824] hover:to-[#164E2D] active:scale-[0.98] transition-all shadow-md shadow-emerald-900/15 cursor-pointer whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-[#164E2D] to-[#1E6B3C] rounded-xl hover:from-[#113824] hover:to-[#164E2D] active:scale-[0.98] transition-all shadow-md shadow-emerald-900/15 cursor-pointer whitespace-nowrap shrink-0"
             >
               <ShoppingBag className="w-4 h-4 text-emerald-200 shrink-0" />
-              <span>Bag</span>
+              <span className="hidden sm:inline">Bag</span>
               <span className="font-mono tabular-nums bg-emerald-800/80 border border-emerald-400/40 px-1.5 py-0.5 rounded text-[11px]">
                 {totalItemCount}
               </span>
