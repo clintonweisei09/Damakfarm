@@ -3,6 +3,7 @@ import { Package, Check, Sparkles, Plus, CheckCircle2 } from 'lucide-react';
 import { Product } from '../types/farm';
 import { PRODUCTS } from '../data/products';
 import { useCurrency } from '../context/CurrencyContext';
+import { farmImages } from '../assets/farmImages';
 
 interface CustomFarmBoxProps {
   onAddCustomBoxToCart: (customProduct: Product) => void;
@@ -63,7 +64,7 @@ export const CustomFarmBox: React.FC<CustomFarmBoxProps> = ({ onAddCustomBoxToCa
       rare: true,
       inStock: true,
       stockCount: 15,
-      image: '/src/assets/images/rare_produce_harvest_1792425694317.jpg',
+      image: farmImages.rareProduce,
       batchCode: `DF-BOX-${new Date().getMonth() + 1}${new Date().getDate()}`,
       seasonalAvailability: 'Autumn Season',
       shippingMethod: 'pickup-or-delivery',

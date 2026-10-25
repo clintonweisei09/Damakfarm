@@ -1,4 +1,5 @@
 import { AdviceArticle, FaqQuestion } from '../types/farm';
+import { farmImages } from '../assets/farmImages';
 
 export const OWNER_INFO = {
   name: 'David & Margaret Damak',
@@ -6,7 +7,7 @@ export const OWNER_INFO = {
   yearsFarming: '28 Years',
   farmLocation: 'Damak Valley Homestead, Ridgefield',
   philosophy: 'Regenerative biodiversity, heritage preservation, and honoring the natural instincts of every animal and heirloom seed in our care.',
-  image: '/src/assets/images/damak_farm_owners_1792425696095.jpg'
+  image: farmImages.farmOwners
 };
 
 export const ADVICE_ARTICLES: AdviceArticle[] = [

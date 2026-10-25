@@ -3,6 +3,7 @@ import { Sprout, Sun, Droplets, Sparkles, ArrowRight, ShieldCheck, Heart, Info, 
 import { FARM_CROPS, FarmCrop } from '../data/crops';
 import { Product } from '../types/farm';
 import { PRODUCTS } from '../data/products';
+import { farmImages } from '../assets/farmImages';
 
 interface CropsSectionProps {
   onAddToCart: (product: Product, quantity?: number) => void;
@@ -118,7 +119,7 @@ export const CropsSection: React.FC<CropsSectionProps> = ({
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-xs aspect-[3/4] rounded-t-full rounded-b-3xl overflow-hidden border-4 border-emerald-300 shadow-xl bg-emerald-950 group">
               <img
-                src="/src/assets/images/vibrant_crops_patch_1792426298694.jpg"
+                src={farmImages.vibrantCrops}
                 alt="Vibrant colorful crops at Damak Farm in sunrise golden hour"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"

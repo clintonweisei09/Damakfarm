@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowDown, Sparkles, ShieldCheck, Sprout, Sun, Calendar } from 'lucide-react';
+import { farmImages } from '../assets/farmImages';
 
 interface HeroProps {
   onShopClick: () => void;
@@ -88,7 +89,7 @@ export const Hero: React.FC<HeroProps> = ({ onShopClick, onAdviceClick, onCropsC
           <div className="lg:col-span-6 relative flex flex-col">
             <div className="relative w-full h-full min-h-[360px] sm:min-h-[460px] rounded-3xl overflow-hidden border-2 border-emerald-200/90 bg-emerald-950 shadow-xl">
               <img
-                src="/src/assets/images/hero_damak_farm_1792425694152.jpg"
+                src={farmImages.heroFarm}
                 alt="Damak Farm morning harvest across organic vegetable beds and rustic farmstead"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"

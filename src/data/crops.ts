@@ -1,4 +1,5 @@
 import { GrowthProgress } from '../types/farm';
+import { farmImages } from '../assets/farmImages';
 
 export interface FarmCrop {
   id: string;
@@ -46,7 +47,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'Preserved by Italian monks since the 16th century, each floret is an exquisite natural logarithmic Fibonacci spiral. We harvest at dawn before morning dew evaporates.',
     harvestMethod: 'Hand-cut with curved harvest knife preserving protective wrapper leaves',
     culinaryUse: 'Whole oven-roasted with aged black garlic, steamed with sea salt, or broken raw into autumn salads',
-    image: '/src/assets/images/rare_produce_harvest_1792425694317.jpg',
+    image: farmImages.rareProduce,
     tags: ['Fibonacci Fractal', 'High Vitamin C', 'Italian Heritage', 'Rare Heirloom'],
     growthProgress: {
       percentage: 88,
@@ -84,7 +85,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'Our rainbow chard rows display glowing ruby, golden canary, and vivid tangerine stalks. Fed exclusively with aerated worm casting teas from our farmstead vermiculture beds.',
     harvestMethod: 'Cut-and-come-again outer stalk harvesting, leaving heart intact for continuous regrowth',
     culinaryUse: 'Stalks braised in white wine & butter; leaves wilted into rustic farm frittatas and grain bowls',
-    image: '/src/assets/images/vibrant_crops_patch_1792426298694.jpg',
+    image: farmImages.vibrantCrops,
     tags: ['Mineral Rich', 'Cut-and-Come-Again', 'High Antioxidant', 'Rainbow Stems'],
     growthProgress: {
       percentage: 95,
@@ -122,7 +123,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'Derived from ancient high-altitude Andean landraces. Its intense violet color permeates the entire flesh and contains 4× the antioxidant power of standard white potatoes.',
     harvestMethod: 'Gently hand-forked from loose raised sandy loam beds to avoid skin bruising',
     culinaryUse: 'Halved and roasted crisp with fresh rosemary and sea salt, or steamed for vibrant violet potato salads',
-    image: '/src/assets/images/rare_produce_harvest_1792425694317.jpg',
+    image: farmImages.rareProduce,
     tags: ['Anthocyanin Violet', 'Andean Heritage', 'Low Glycemic', 'Waxy Roasting'],
     growthProgress: {
       percentage: 82,
@@ -160,7 +161,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'Introduced near Venice in the 1840s. Slicing reveals concentric bullseye rings of vivid crimson and porcelain white that brighten every culinary presentation.',
     harvestMethod: 'Hand-pulled at 2-3 inch diameter when tender and tops are still vibrant',
     culinaryUse: 'Shaved paper-thin with a mandoline for raw carpaccio drizzled with raw honey and goat cheese',
-    image: '/src/assets/images/rare_produce_harvest_1792425694317.jpg',
+    image: farmImages.rareProduce,
     tags: ['Candy Bullseye', 'Venetian Heirloom', 'Super Sweet', 'No Bleeding'],
     growthProgress: {
       percentage: 92,
@@ -198,7 +199,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'A prized seasoning pepper native to Peru. The plants are prolific producers of pointed canary-yellow pods that smell of crushed lemongrass.',
     harvestMethod: 'Hand-clipped with stems attached when skin turns deep golden yellow',
     culinaryUse: 'Finely minced in citrus ceviche, infused into farmstead chili oils, or solar-dried into yellow pepper flakes',
-    image: '/src/assets/images/vibrant_crops_patch_1792426298694.jpg',
+    image: farmImages.vibrantCrops,
     tags: ['Citrus Heat', 'Peruvian Landrace', 'Solar Dried', 'Bright Flavor'],
     growthProgress: {
       percentage: 76,
@@ -236,7 +237,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'Cultivated in Tuscany since the 18th century. Known for deeply embossed, blue-green strappy leaves that become remarkably sweet after the first autumn frost.',
     harvestMethod: 'Stripped from the bottom stalk upwards in early morning when crisp',
     culinaryUse: 'The irreplaceable soul of hearty ribollita vegetable stew, or massaged with lemon oil for crunchy raw salads',
-    image: '/src/assets/images/vibrant_crops_patch_1792426298694.jpg',
+    image: farmImages.vibrantCrops,
     tags: ['Frost Sweetened', 'Tuscan Heirloom', 'Antioxidant Powerhouse', 'Deep Emerald'],
     growthProgress: {
       percentage: 90,
@@ -274,7 +275,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'Grown across Europe since the 1500s for winter sustenance. Renowned in traditional European folk medicine for liver stimulation and winter resilience.',
     harvestMethod: 'Pulled late autumn before deep ground freeze and stored in damp cellar sand',
     culinaryUse: 'Grated fine into sour cream dressings, fermented with salt into winter kimchi, or pan-fried with duck fat',
-    image: '/src/assets/images/rare_produce_harvest_1792425694317.jpg',
+    image: farmImages.rareProduce,
     tags: ['Coal Black Skin', 'Snow White Interior', 'Spicy Mustard Kick', 'Winter Storage'],
     growthProgress: {
       percentage: 68,
@@ -312,7 +313,7 @@ export const FARM_CROPS: FarmCrop[] = [
     story: 'Our permaculture windbreak hedgerows are planted with heirloom berry canes and medicinal aromatic herbs that feed our bees and yield boutique pantry preserves.',
     harvestMethod: 'Hand-picked berry by berry at optimal brix sugar peak',
     culinaryUse: 'Infused into herbal tisanes, churned into goat curd tarts, or simmered into small-batch fruit spreads',
-    image: '/src/assets/images/vibrant_crops_patch_1792426298694.jpg',
+    image: farmImages.vibrantCrops,
     tags: ['Bee Friendly', 'Heirloom Orchard', 'Essential Oils', 'Perennial Permaculture'],
     growthProgress: {
       percentage: 85,
